@@ -1,0 +1,6 @@
+module.exports = {
+  ACTION: {
+    GET_HEROS_SUCCESS: 'GET_HEROS_SUCCESS',
+    GET_HEROS_FAIL: 'GET_HEROS_FAIL'
+  }
+}
