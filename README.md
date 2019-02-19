@@ -1,4 +1,4 @@
-# coska-react
+# react-frontend
 
 ## Set Up
 
