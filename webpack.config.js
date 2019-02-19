@@ -1,41 +1,34 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
-  entry: ['babel-polyfill', './app/index.js'],
+  entry: './app/index.js',
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: ['babel-loader']
+      }
+    ]
+  },
+  resolve: {
+    extensions: ['*', '.js', '.jsx']
+  },
   output: {
-    path: 'dist',
+    path: __dirname + '/dist',
+    publicPath: '/',
     filename: 'bundle.js'
   },
-  plugins: [new HtmlWebpackPlugin({
-    title: 'COSKA REACT',
-    template: './app/index.html'
-  })],
-  //devtool: 'source-map',
-	module: {
-		loaders: [
-			{
-				test: /\.(js|jsx)$/,
-				exclude: /node_modules/,
-				loader: "babel-loader",
-		        query: {
-		          presets:['react', 'es2015']
-		        }
-			},
-			{
-				test: /\.css$/,
-				exclude: /node_modules/,
-				loader: "style-loader!css-loader"
-			},
-			{
-				test: /\.less$/,
-				exclude: /node_modules/,
-				loader: "style-loader!css-loader!less-loader"
-			},
-			{
-				test: /\.(png|jpg|ttf|eot|woff|svg)$/,
-				exclude: /node_modules/,
-				loader: 'url-loader?limit=10000'
-			}
-		]
-	},
-}
+  plugins: [
+		new HtmlWebpackPlugin({
+			title: 'My App',
+			template: 'app/index.html'
+		}),
+    new webpack.HotModuleReplacementPlugin()
+  ],
+  devServer: {
+    contentBase: './dist',
+    hot: true
+  }
+};

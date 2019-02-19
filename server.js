@@ -1,13 +1,7 @@
 var express = require('express');
 var app = express();
 
-app.use( express.static('dist') );
-
-app.get("/", function(req, res) {
-  res.sendFile(__dirname + '/index.html')
-});
-
-app.get("/api/v0/heroes", function(req, res) {
+app.get("/api/heroes", function(req, res) {
   res.json([{
     id: 1,
     name: 'Superman'
